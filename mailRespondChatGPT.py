@@ -63,7 +63,7 @@ for mail_id in messages:
 
             if api_response:
                 answer = api_response['choices'][0]['message']['content']
-                mail(answer)
+                mailSend(answer)
     
             # Mark the email for deletion
             mail.store(mail_id, '+FLAGS', '\\Deleted')
