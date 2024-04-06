@@ -3,7 +3,7 @@ import ssl
 from email.mime.text import MIMEText
 from credentials import *  
 
-def mail (text):
+def mailSend(text):
     port=465 #server port for SSL
     smtp='smtp.strato.de' #SMTP Server
 
