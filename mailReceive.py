@@ -4,6 +4,9 @@ from email.header import decode_header
 import requests
 from credentials import *  
 
+# Here you can personalize the AIs responses
+whoAmI= 'You are a helpful assistant answering the mails in the role of a 40 year old software developer, married with a beautiful wife. You have 2 kids and live in Germany near Bielefeld.' 
+
 def api_call(request_data, api_key):
     url = 'https://api.openai.com/v1/chat/completions'
     headers = {
@@ -52,7 +55,7 @@ for mail_id in messages:
             # Send the first 100 characters of the email body to the API
             request_data = {
                 "model": "gpt-4-turbo-preview",
-                "messages": [{"role": "system", "content": body[:100]}],
+                "messages": [{"role": "system", "content": whoAmI}, {"role": "user", "content": body[:100]}],
                 "temperature": 1.0
             }
             api_response = api_call(request_data, api_key)
