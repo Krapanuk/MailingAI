@@ -51,7 +51,7 @@ for mail_id in messages:
 
             # Send the first 100 characters of the email body to the API
             request_data = {
-                "model": "gpt-4-turbo",
+                "model": "gpt-4-turbo-preview",
                 "messages": [{"role": "system", "content": body[:100]}],
                 "temperature": 1.0
             }
