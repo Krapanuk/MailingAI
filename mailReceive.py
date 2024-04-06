@@ -1,64 +1,70 @@
 import imaplib
 import email
 from email.header import decode_header
+import requests
 from credentials import *  
+
+def api_call(request_data, api_key):
+    url = 'https://api.openai.com/v1/chat/completions'
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {api_key}',
+    }
+    response = requests.post(url, json=request_data, headers=headers)
+    if response.ok:
+        return response.json()
+    else:
+        print(f"Error during API call: {response.status_code}")
+        return None
 
 # Connect to the email server
 mail = imaplib.IMAP4_SSL('imap.strato.de')
 mail.login(user, password)
-
 # Select the mailbox you want to check (INBOX, for example)
 mail.select('inbox')
 
 # Search for specific emails. Use 'ALL' to get all emails.
 # Other criteria can be used (e.g., UNSEEN for unread emails).
 status, messages = mail.search(None, 'ALL')
-
 # Convert the result to a list of email IDs
 messages = messages[0].split()
 
 for mail_id in messages:
     # Fetch the email by ID
     status, data = mail.fetch(mail_id, '(RFC822)')
-
-    # The content data at the '(RFC822)' part comes in a tuple
     for response_part in data:
         if isinstance(response_part, tuple):
-            # Parse the raw email content
             msg = email.message_from_bytes(response_part[1])
-            # Decode the email subject
             subject, encoding = decode_header(msg["Subject"])[0]
             if isinstance(subject, bytes):
-                # If it's a bytes type, decode to str
                 subject = subject.decode(encoding)
-            # Print email subject
-            print("Subject:", subject)
-            
-            # If the email message is multipart
+
+            body = ""
             if msg.is_multipart():
-                # Iterate over email parts
                 for part in msg.walk():
-                    # Extract content type of email
-                    content_type = part.get_content_type()
-                    content_disposition = str(part.get("Content-Disposition"))
-                    # Get the email body
-                    if content_type == "text/plain" and "attachment" not in content_disposition:
+                    if part.get_content_type() == "text/plain" and "attachment" not in str(part.get("Content-Disposition")):
                         body = part.get_payload(decode=True).decode()
-                        print(body)
+                        break
             else:
-                # Extract content type of email
-                content_type = msg.get_content_type()
-                # Get the email body
-                if content_type == "text/plain":
+                if msg.get_content_type() == "text/plain":
                     body = msg.get_payload(decode=True).decode()
-                    print(body)
+
+            # Send the first 100 characters of the email body to the API
+            request_data = {
+                "model": "gpt-4-turbo",
+                "messages": [{"role": "system", "content": body[:100]}],
+                "temperature": 1.0
+            }
+            api_response = api_call(request_data)
+
+            if api_response:
+                answer = api_response['choices'][0]['message']['content']
+                print("API response:", answer)
     
-    # Mark the email for deletion
-    mail.store(mail_id, '+FLAGS', '\\Deleted')
+            # Mark the email for deletion
+            mail.store(mail_id, '+FLAGS', '\\Deleted')
 
-# Expunge the mailbox to permanently delete the emails marked for deletion
+# Expunge and logout
 mail.expunge()
-
-# Close the connection and logout
 mail.close()
 mail.logout()
