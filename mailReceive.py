@@ -52,6 +52,12 @@ for mail_id in messages:
                 if content_type == "text/plain":
                     body = msg.get_payload(decode=True).decode()
                     print(body)
+    
+    # Mark the email for deletion
+    mail.store(mail_id, '+FLAGS', '\\Deleted')
+
+# Expunge the mailbox to permanently delete the emails marked for deletion
+mail.expunge()
 
 # Close the connection and logout
 mail.close()
