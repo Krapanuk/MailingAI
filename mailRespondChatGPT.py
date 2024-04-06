@@ -37,6 +37,8 @@ status, messages = mail.search(None, 'ALL')
 # Convert the result to a list of email IDs
 messages = messages[0].split()
 
+processed_ids = set()
+
 for mail_id in messages:
     # Fetch the email by ID
     if mail_id in processed_ids:
