@@ -2,7 +2,8 @@ import imaplib
 import email
 from email.header import decode_header
 import requests
-from credentials import *  
+from credentials import *
+from mailSend import *
 
 # Here you can personalize the AIs responses
 whoAmI= 'You are a helpful assistant answering the mails in the role of a 40 year old software developer, married with a beautiful wife. You have 2 kids and live in Germany near Bielefeld.' 
@@ -62,7 +63,7 @@ for mail_id in messages:
 
             if api_response:
                 answer = api_response['choices'][0]['message']['content']
-                print("API response:", answer)
+                mail(answer)
     
             # Mark the email for deletion
             mail.store(mail_id, '+FLAGS', '\\Deleted')
