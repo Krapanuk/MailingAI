@@ -8,7 +8,7 @@ def mail (text):
     smtp='smtp.strato.de' #SMTP Server
 
     message=MIMEText(text, 'plain')
-    message['Subject']='Test Betreff'
+    message['Subject']='AI Response'
     message['From']=sender_email
     message['To']=receiver_email
 
