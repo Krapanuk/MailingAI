@@ -3,6 +3,7 @@ import email
 from email.header import decode_header
 import requests
 from credentials import *
+from mailSend import *
 
 # Personalize AI responses here
 whoAmI = 'You are a helpful assistant answering the mails in the role of a 40 year old software developer, married with a beautiful wife. You have 2 kids and live in Germany near Bielefeld.' 
