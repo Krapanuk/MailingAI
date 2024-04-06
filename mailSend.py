@@ -7,7 +7,6 @@ def mail (text):
     port=465 #server port for SSL
     smtp='smtp.strato.de' #SMTP Server
 
-    #message=MIMEText(text, 'plain')
     message=MIMEText(text, 'plain')
     message['Subject']='Test Betreff'
     message['From']=sender_email
