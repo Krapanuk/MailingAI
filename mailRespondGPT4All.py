@@ -60,7 +60,7 @@ for mail_id in messages:
 
             if local_ai_response:
                 answer = local_ai_response['choices'][0]['text']
-                print("Local AI response:", answer)
+                mailSend(answer)
     
             mail.store(mail_id, '+FLAGS', '\\Deleted')
 
