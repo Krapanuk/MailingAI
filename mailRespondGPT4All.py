@@ -2,11 +2,15 @@ import imaplib
 import email
 from email.header import decode_header
 import requests
+import time # for delays
 from credentials import *
 from mailSend import *
 
 # Personalize AI responses here
 whoAmI = 'You are a helpful assistant answering the mails in the role of a 40 year old software developer, married with a beautiful wife. You have 2 kids and live in Germany near Bielefeld.' 
+
+def log_message(message):
+    print(message)
 
 def local_ai_call(prompt, model="TheBloke/Llama-2-7B-Chat-GGUF"):
     apiUrl = "http://127.0.0.1:4891/v1/completions"  # Local AI endpoint
@@ -38,7 +42,11 @@ mail.select('inbox')  # Select the mailbox
 status, messages = mail.search(None, 'ALL')
 messages = messages[0].split()
 
+processed_ids = set()
+
 for mail_id in messages:
+    if mail_id in processed_ids:
+        continue  # Don't process the same mail twice
     status, data = mail.fetch(mail_id, '(RFC822)')
     for response_part in data:
         if isinstance(response_part, tuple):
@@ -63,7 +71,10 @@ for mail_id in messages:
                 answer = local_ai_response['choices'][0]['text']
                 mailSend(answer)
     
+            # Mark the email for deletion
             mail.store(mail_id, '+FLAGS', '\\Deleted')
+            processed_ids.add(mail_id)  # mark mail as processed
+            time.sleep(1)  # delay, giving the server enough time to process the request
 
 mail.expunge()
 mail.close()
