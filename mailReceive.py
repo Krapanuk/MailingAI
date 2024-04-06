@@ -55,7 +55,7 @@ for mail_id in messages:
                 "messages": [{"role": "system", "content": body[:100]}],
                 "temperature": 1.0
             }
-            api_response = api_call(request_data)
+            api_response = api_call(request_data, api_key)
 
             if api_response:
                 answer = api_response['choices'][0]['message']['content']
