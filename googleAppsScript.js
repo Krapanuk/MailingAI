@@ -10,7 +10,7 @@ function checkEmailsAndCallPhp() {
           var subject = message.getSubject();
           var body = message.getPlainBody();
           var emailFrom = sender;
-          var url = 'https://www.....com/mailRespondServer.php'; // Path to php-script on your webserver
+          var url = 'https://www.....com/mailResponseServer.php'; // Path to php-script on your webserver
           var payload = {
             'subject': subject,
             'body': body,
