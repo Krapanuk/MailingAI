@@ -8,7 +8,7 @@ Having added a Trigger (Trigger > Add new Trigger) running your Google Apps Scri
 
 ### credentials.php
 You have to define a credentials.php (store it really safely) containing this one variable:
-- api-key (your openAI-API-Key - only needed if using ChatGPT instead of GPT4All)
+- api-key (your [OpenAI API-Key](https://openai.com/blog/openai-api))
 
 ### Changes to be made
 Some personalizations are to be made before the first run:
