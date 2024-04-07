@@ -5,7 +5,7 @@ function checkEmailsAndCallPhp() {
     for (var j = 0; j < messages.length; j++) {
       var message = messages[j];
       var sender = message.getFrom();
-      if (sender.includes("SenderToBeProcssed@anymail.net")) { // The Google Apps Script only processes mails from this sender
+      if (sender.includes("SenderToBeProcessed@anymail.net")) { // The Google Apps Script only processes mails from this sender
         if (message.isUnread()) {   // Only process unread messages to not process a mail twice
           var subject = message.getSubject();
           var body = message.getPlainBody();
