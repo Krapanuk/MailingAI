@@ -13,11 +13,11 @@ You have to define a credentials.php (store it really safely) containing this on
 ### Changes to be made
 Some personalizations are to be made before the first run:
 - mailRespondServer.php:
-  > Update the $receiverEmail and $senderEmail variables' placeholder mailadress "SenderToBeProcssed@anymail.net" to your personal mail-adress you will be sending mails for the AI to respond and
-  > change the description in the $whoAmI variable to what fits best for you.
+  - Update the $receiverEmail and $senderEmail variables' placeholder mailadress "SenderToBeProcssed@anymail.net" to your personal mail-adress you will be sending mails for the AI to respond and
+  - change the description in the $whoAmI variable to what fits best for you.
 - Google Apps Script googleAppsScript.js:
-  > Update the placeholder mailadress "SenderToBeProcssed@anymail.net" to your personal mail-adress you will be sending mails for the AI to respond and
-  > change the url-variable to fit the path to the mailRespondServer.php-script on your webserver and 
+  - Update the placeholder mailadress "SenderToBeProcssed@anymail.net" to your personal mail-adress you will be sending mails for the AI to respond and
+  - change the url-variable to fit the path to the mailRespondServer.php-script on your webserver and 
 
 ### Test it
 Having changed the few variables you're ready to send your first mail to the Google-Account, waiting 1 min. having the trigger executed and a few seconds later receiving AIs response in your response-mail-account.
