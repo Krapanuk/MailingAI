@@ -2,7 +2,7 @@
 The AI to auto-respond your mails
 
 ## Server-Sided: ChatGPT (API-Key needed)
-Just put the mailRespond.php and credentials.php on your WebServer and add the Google Apps Script googleAppsScript.js to a new Google-Account you'd like to use for generating AI mail responses.
+Just put the mailRespondServer.php and credentials.php on your WebServer and add the Google Apps Script googleAppsScript.js to a new Google-Account you'd like to use for generating AI mail responses.
 Having added a Trigger (Trigger > Add new Trigger) running your Google Apps Script, every minute works best for me, you only need to send a mail to the Google-Account, waiting 1 min. having the trigger executed.
 
 ### credentials.php
