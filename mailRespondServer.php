@@ -6,7 +6,7 @@ $emailSubjectEncoded = mb_encode_mimeheader($emailSubject, 'UTF-8', 'B');
 $emailBody = $_POST['body'] ?? 'empty mail text';
 $senderEmail = $_POST['sender'] ?? 'empty sender';
 
-$receiverEmail = 'AiResponseToBeSentTo@anymail.net';  // Mail adress the AIs response-mailtext should be sent to
+$receiverEmail = 'SenderToBeProcssed@anymail.net';  // Mail adress the AIs response-mailtext should be sent to
 // Description of you personally to create better fitting mail responses
 $whoAmI = "You are a helpful assistant answering the mails in the role of a 40 year old software developer, married with a beautiful wife. You have 2 kids and live in Germany near Bielefeld."
 
