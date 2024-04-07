@@ -1,5 +1,5 @@
 # MailingAI
-The AI to auto-respond your mails: 
+The AI to auto-respond your mails: <br> 
 Send a mail from your personal mail-account to a new AI-Response-GoogleMail Account receiving an AI-generated response-mail.
 
 ## Server-Sided: ChatGPT ([API-Key needed](https://openai.com/blog/openai-api))
