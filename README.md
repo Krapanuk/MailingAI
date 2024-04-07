@@ -3,7 +3,7 @@ The AI to auto-respond your mails:
 Send a mail from your personal mail-account to a new AI-Response-GoogleMail Account receiving an AI-generated response-mail.
 
 ## Server-Sided: ChatGPT (API-Key needed)
-Just put the mailRespondServer.php and credentials.php on your WebServer and add the Google Apps Script googleAppsScript.js to a new Google-Account you'd like to use for generating AI mail responses.
+Just put the mailResponseServer.php and credentials.php on your WebServer and add the Google Apps Script googleAppsScript.js to a new Google-Account you'd like to use for generating AI mail responses.
 Having added a Trigger (Trigger > Add new Trigger) running your Google Apps Script, every minute works best for me, you only need make some small changes fitting the files for your purposes. send a mail to the Google-Account, waiting 1 min. having the trigger executed.
 
 ### credentials.php
@@ -12,12 +12,12 @@ You have to define a credentials.php (store it really safely) containing this on
 
 ### Changes to be made
 Some personalizations are to be made before the first run:
-- mailRespondServer.php:
+- mailResponseServer.php:
   - Update the $receiverEmail and $senderEmail variables' placeholder mailadress "SenderToBeProcssed@anymail.net" to your personal mail-adress you will be sending mails for the AI to respond and
   - change the description in the $whoAmI variable to what fits best for you.
 - Google Apps Script googleAppsScript.js:
   - Update the placeholder mailadress "SenderToBeProcssed@anymail.net" to your personal mail-adress you will be sending mails for the AI to respond and
-  - change the url-variable to fit the path to the mailRespondServer.php-script on your webserver and 
+  - change the url-variable to fit the path to the mailResponseServer.php-script on your webserver and 
 
 ### Test it
 Having changed the few variables you're ready to send your first mail to the Google-Account, waiting 1 min. having the trigger executed and a few seconds later receiving AIs response in your response-mail-account.
